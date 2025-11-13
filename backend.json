@@ -1,0 +1,79 @@
+{
+  "entities": {
+    "Device": {
+      "title": "Device",
+      "description": "Represents a tracked device with its vitals and location.",
+      "type": "object",
+      "properties": {
+        "heartRate": {
+          "type": "number",
+          "description": "The user's heart rate in beats per minute."
+        },
+        "spo2": {
+          "type": "number",
+          "description": "Blood oxygen saturation level in percentage."
+        },
+        "temperature": {
+          "type": "number",
+          "description": "Body temperature in Celsius."
+        },
+        "acceleration": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "z": {
+              "type": "number"
+            }
+          },
+          "description": "3-axis acceleration data."
+        },
+        "motorSpeed": {
+          "type": "number",
+          "description": "The speed of the device's motor in km/h."
+        },
+        "battery": {
+          "type": "number",
+          "description": "Remaining battery life percentage."
+        },
+        "connectivity": {
+          "type": "string",
+          "enum": ["online", "offline", "weak"],
+          "description": "The device's connectivity status."
+        },
+        "gps": {
+          "type": "object",
+          "properties": {
+            "lat": {
+              "type": "number"
+            },
+            "lng": {
+              "type": "number"
+            }
+          },
+          "description": "GPS coordinates."
+        },
+        "lastSeen": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the device data was last updated."
+        }
+      }
+    }
+  },
+  "auth": {
+    "providers": []
+  },
+  "firestore": {
+    "/devices/{deviceId}": {
+      "schema": {
+        "$ref": "#/entities/Device"
+      },
+      "description": "Stores data for individual tracking devices."
+    }
+  }
+}
